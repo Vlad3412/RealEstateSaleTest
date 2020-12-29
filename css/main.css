@@ -325,6 +325,9 @@ a.card-link:hover{
     display: block;
     cursor: pointer;
 }
+.checkbox--hidden{
+    display: none;
+}
 .checkbox + .checkbox{
     margin-top: 15px;
 }
@@ -375,7 +378,7 @@ a.card-link:hover{
 .widget__hidden{
     display: none;
 }
-.widget__show-hidden{
+.widget__btn-show-hidden{
     display: inline-block;
     margin-top: 15px;
     padding: 0;
@@ -390,7 +393,10 @@ a.card-link:hover{
     cursor: pointer;
     transition: color 0.2s ease-in;
 }
-.widget__show-hidden:hover{
+.widget__btn-show-hidden:active .widget__btn-show-hidden:focus{
+    outline: none;
+}
+.widget__btn-show-hidden:hover{
     color: #187bc2;
     text-decoration: underline;
 }

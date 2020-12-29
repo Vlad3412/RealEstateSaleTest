@@ -1,3 +1,15 @@
+/**
+ * NodeList.prototype.forEach() polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach#Polyfill
+ */
+if (window.NodeList && !NodeList.prototype.forEach) {
+	NodeList.prototype.forEach = function (callback, thisArg) {
+		thisArg = thisArg || window;
+		for (var i = 0; i < this.length; i++) {
+			callback.call(thisArg, this[i], i, this);
+		}
+	};
+}
 // фільтр для мобльних пристоїв
 const sidebarToggleBtn = document.querySelector('.menu-icon-wrapper');
 const menuIcon = document.querySelector('.menu-icon');
@@ -49,3 +61,26 @@ topLocationCheckboxes.forEach(function(item){
         }
     })
 })
+
+// Показати ще 3 доп опції з чек боксом в фільтрі
+const showMoreOptions  = document.querySelector('.widget__btn-show-hidden');
+const hiddenCheckBoxes  = document.querySelectorAll('.checkbox--hidden');//колекція елементів
+showMoreOptions.onclick = function(e){
+    e.preventDefolfault();
+// Якщо блоки були скриті - показуємо
+    if(showMoreOptions.dataset.options == 'hidden'){
+        hiddenCheckBoxes.forEach(function(item){
+            item.style.display = 'block';
+         });
+        showMoreOptions.innerText = "Скрыть дополнительные опции";
+        showMoreOptions.dataset.options = 'visible';
+    }
+    // Якщо блоки були видимі - скриваємо
+    else if(showMoreOptions.dataset.options == 'visible'){
+        hiddenCheckBoxes.forEach(function(item){
+            item.style.display = 'none';
+         });
+        showMoreOptions.innerText = "Показать ещё";
+        showMoreOptions.dataset.options = 'hidden';
+    }
+}
